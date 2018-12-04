@@ -8,6 +8,23 @@ import {
 } from "@graphprotocol/graph-ts";
 
 export class ExampleEntity extends Entity {
+  get id(): string {
+    let value = this.get("id");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toString() as string;
+    }
+  }
+
+  set id(value: string) {
+    if (value === null) {
+      this.unset("id");
+    } else {
+      this.set("id", Value.fromString(value as string));
+    }
+  }
+
   get optionalBoolean(): boolean | null {
     let value = this.get("optionalBoolean");
     if (value === null) {
@@ -443,6 +460,25 @@ export class ExampleEntity extends Entity {
         "requiredReferenceList",
         Value.fromStringArray(value as Array<string>)
       );
+    }
+  }
+}
+
+export class OtherEntity extends Entity {
+  get id(): string {
+    let value = this.get("id");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toString() as string;
+    }
+  }
+
+  set id(value: string) {
+    if (value === null) {
+      this.unset("id");
+    } else {
+      this.set("id", Value.fromString(value as string));
     }
   }
 }
